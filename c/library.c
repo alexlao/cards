@@ -39,7 +39,7 @@ void oneRound(Deck *original, int *cleanArr){
 		printf("head val: %d\n", headVal);
 		cleanArr[i]=headVal;
 		printf("array head val: %d\n", cleanArr[i]);
-		printf("New head Val: %d\n", original->head->cardValue);
+		/*printf("New head Val: %d\n", original->head->cardValue);*/
 		if(original->head!=NULL){
 			addCardTail(original, removeHead(original));
 		}
@@ -57,6 +57,9 @@ int removeHead(Deck *modify){
 	free(modify->head);
 	modify->head = temp;
 	modify->deckSize = modify->deckSize - 1;
+	if(modify->deckSize==0){
+		modify->head=NULL;
+	}
 	printf("Removing %d\n", returnVal);
 	return returnVal;
 }
@@ -72,6 +75,10 @@ void addCardTail(Deck *modify, int value){
 	printf("Tail val: %d\n", modify->tail->cardValue);
 	modify->tail->next = newCard;
 	modify->tail = newCard;
+	if(modify->deckSize == 0){
+		modify->head=newCard;
+	}
+	modify->deckSize = modify->deckSize + 1;
 }
 
 void addCardHead(Deck *modify, int value){
