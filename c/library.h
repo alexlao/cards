@@ -15,4 +15,8 @@ struct deckStruct{
 };
 Deck *genDeck(int size);
 void freeDeck(Deck *list);
+void oneRound(Deck *original, int *cleanArr);
+void addCardHead(Deck *mod, int val);
+void addCardTail(Deck *mod, int val);
+int removeHead(Deck *original);
 #endif

@@ -9,13 +9,24 @@ int main(int argc, char *argv[]){
 		ptr = ptr->next;
 	}
 	freeDeck(deck);*/
+	int i;
 	Node *ptr;
 	Deck *myDeck;
-	myDeck = genDeck(5);
+	int arr[6];
+	myDeck = genDeck(6);/*
+	addCardHead(myDeck, 100);
+	addCardHead(myDeck, 1000);
+	addCardTail(myDeck, 100000);*/
 	ptr = myDeck->head;
 	while(ptr!=NULL){
 		printf("Card Value %d\n", ptr->cardValue);
 		ptr = ptr->next;
 	}
-	freeDeck(myDeck);
+
+	printf("New deck\n");
+	oneRound(myDeck,arr);
+	for(i=0;i<6;i++){
+		printf("New value: %d\n", arr[i]);
+	}
+	/*freeDeck(myDeck);*/
 }

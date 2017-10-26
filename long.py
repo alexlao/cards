@@ -1,5 +1,5 @@
 def main():
-    count = 13
+    count = 6
     deck = []
     origDeck = []
     ans = 0

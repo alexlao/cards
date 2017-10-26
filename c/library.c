@@ -1,21 +1,7 @@
 #include "library.h"
 
 Deck *genDeck(int size){
-	int i;/*
-	Node *ptr;
-	Node *head, *newNode;
-	head = (Node*)malloc(sizeof(Node));
-	head->cardValue = 0;
-	head->next = NULL;
-	ptr = head;
-	for(i=1;i<size;i++){
-		newNode = malloc(sizeof(Node));
-		newNode->cardValue = i;
-		newNode->next = NULL;
-		ptr->next = newNode;
-		ptr=ptr->next;
-	}
-	return head;*/
+	int i;
 	Node *newNode;
 	Deck *newDeck = (Deck*)malloc(sizeof(Deck));
 	newDeck->deckSize = size;
@@ -41,4 +27,62 @@ void freeDeck(Deck *list){
 		free(temp2);
 	}
 	free(list);
+}
+
+void oneRound(Deck *original, int *cleanArr){
+	/*return the array of ints
+	int deckArr[original->size];*/
+	int i,z;
+	i=original->deckSize - 1;
+	while(original->head != NULL){
+		int headVal = removeHead(original);
+		printf("head val: %d\n", headVal);
+		cleanArr[i]=headVal;
+		printf("array head val: %d\n", cleanArr[i]);
+		printf("New head Val: %d\n", original->head->cardValue);
+		if(original->head!=NULL){
+			addCardTail(original, removeHead(original));
+		}
+		i--;
+	}
+	for(z=0;z<6;z++){
+		printf("Inside Array: %d\n", cleanArr[z]);
+	}
+}	
+
+int removeHead(Deck *modify){
+	Node *temp;
+	int returnVal = modify->head->cardValue;
+	temp = modify->head->next;
+	free(modify->head);
+	modify->head = temp;
+	modify->deckSize = modify->deckSize - 1;
+	printf("Removing %d\n", returnVal);
+	return returnVal;
+}
+
+void addCardTail(Deck *modify, int value){
+	Node *newCard;
+	if((newCard = (Node*)malloc(sizeof(Node)))==NULL){
+		fprintf(stderr,"Out of memory");
+		exit(-1);
+	}
+	newCard->cardValue = value;
+	newCard->next = NULL;
+	printf("Tail val: %d\n", modify->tail->cardValue);
+	modify->tail->next = newCard;
+	modify->tail = newCard;
+}
+
+void addCardHead(Deck *modify, int value){
+	Node *newCard;
+	if((newCard = (Node*)malloc(sizeof(Node)))==NULL){
+		fprintf(stderr,"Out of memory");
+		exit(-1);
+	}
+	newCard->cardValue = value;
+	newCard->next = NULL;
+
+	newCard->next = modify->head;
+	modify->head = newCard;
 }
