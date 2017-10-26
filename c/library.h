@@ -7,6 +7,12 @@ struct nodeStruct{
 	int cardValue;
 	Node *next;
 };
-Node *genDeck(int size);
-void freeDeck(Node *list);
+typedef struct deckStruct Deck;
+struct deckStruct{
+	int deckSize;
+	Node *head;
+	Node *tail;
+};
+Deck *genDeck(int size);
+void freeDeck(Deck *list);
 #endif

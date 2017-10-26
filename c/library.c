@@ -1,7 +1,7 @@
 #include "library.h"
 
-Node *genDeck(int size){
-	int i;
+Deck *genDeck(int size){
+	int i;/*
 	Node *ptr;
 	Node *head, *newNode;
 	head = (Node*)malloc(sizeof(Node));
@@ -15,14 +15,30 @@ Node *genDeck(int size){
 		ptr->next = newNode;
 		ptr=ptr->next;
 	}
-	return head;
+	return head;*/
+	Node *newNode;
+	Deck *newDeck = (Deck*)malloc(sizeof(Deck));
+	newDeck->deckSize = size;
+	newDeck->head = (Node*)malloc(sizeof(Node));
+	newDeck->head->cardValue =0;
+	newDeck->tail = newDeck->head;
+	for(i=1;i<size;i++){
+		newNode = (Node*)malloc(sizeof(Node));
+		newNode->cardValue = i;
+		newNode->next=NULL;
+		newDeck->tail->next=newNode;
+		newDeck->tail = newNode;
+	}
+	return newDeck;
 }
 
-void freeDeck(Node *list){
-	Node *temp;
-	while(list!=NULL){
-		temp = list;
-		list = list->next;
-		free(temp);
+void freeDeck(Deck *list){
+	Node *temp, *temp2;
+	temp = list->head;
+	while(temp!=NULL){
+		temp2 = temp;
+		temp = temp2->next;
+		free(temp2);
 	}
+	free(list);
 }
