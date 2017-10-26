@@ -10,11 +10,10 @@ def main():
         origDeck.append(j)
 
     # Run through one round
-    for i in deck:
-        print(i)
+
     print("starting")
     deck = round(deck)
-    # print("deck after one: " + ','.join(deck))
+    ans = ans + 1
     for i in deck:
         print(i)
 
@@ -23,14 +22,14 @@ def main():
         deck = round(deck)
         ans += 1
 
-    print(ans)
+    print("total: " + str(ans))
 def round(deck):
     table = []
     while len(deck) > 0:
         table.append(deck.pop(0))
         if len(deck) != 0:
             deck.append(deck.pop(0))
-        table.reverse()
+    table.reverse()
     return table
 if __name__ == "__main__":
     main()
