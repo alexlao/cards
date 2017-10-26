@@ -1,11 +1,11 @@
 def main():
-    count = 6
+    count = 13
     deck = []
     origDeck = []
     ans = 0
 
     # Generate deck and copy
-    for j in range(1, count + 1):
+    for j in range(0, count):
         deck.append(j)
         origDeck.append(j)
 
