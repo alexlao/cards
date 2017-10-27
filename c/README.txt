@@ -41,20 +41,8 @@ To develop this program, I used several tools:
 	- Valgrind -> Memory Debugging
 	- GDB -> Debugger
 	- GitHub -> Version Control
+	- GCC -> Compiler
 ================================
 
 Once again, thank you for your time and consideration.
 If you have any questions about my program, please feel free to contact me at lao.alex97@gmail.com or (847)-624-9797.
-
-
-               --         
-            /dm/         
-        `  .hs-`         
-     :ymmmdsydmmmh+      
-    +mmmmmmmmmmmmy`      
-    dmmmmmmmmmmmm`       
-    hmmmmmmmmmmmm+       
-    :mmmmmmmmmmmmmh-     
-     /mmmmmmmmmmmmy`     
-      -ymmdyyhmmd/       
-        ``     `       
