@@ -26,7 +26,7 @@ void freeDeck(Deck *list){
 void oneRound(Deck *original, int *cleanArr){
 	/*return the array of ints
 	int deckArr[original->size];*/
-	int i,z;
+	int i;
 	i=original->deckSize - 1;
 	while(original->head != NULL){
 		int headVal = removeHead(original);
@@ -82,10 +82,19 @@ void createCycles(int *completedArr, int *result){
 }
 
 int lcm(int *factors){
-	int product, i;
+	int product, i,z;
 	product = 1;
 	for(i=0;i<deckSizeSpec;i++){
-		product = product *(factors[i]/ gcd(product,factors[i]));
+		/*product = product *(factors[i]/ gcd(product,factors[i]));*/
+		int gcdValue = gcd(product,factors[i]);
+		z = product * (factors[i]/ gcdValue);
+		if(product!=0&&(z/product!=(factors[i]/gcdValue))){
+			fprintf(stderr,"Too many rounds. Overflow occured.\n");
+			return -1;
+		}
+		else{
+			product = z;
+		}
 	}
 	return product;
 }

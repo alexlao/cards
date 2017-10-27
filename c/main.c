@@ -40,7 +40,9 @@ int main(int argc, char *argv[]){
 		freeDeck(myDeck);
 		free(arr);
 		free(clean);
-		printf("Rounds: %d\n", lcmAns);
+		if(lcmAns !=-1){
+			printf("Rounds: %d\n", lcmAns);
+		}
 		return 0;
 	}
 }
