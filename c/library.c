@@ -1,5 +1,5 @@
 #include "library.h"
-
+static int deckSizeSpec;
 Deck *genDeck(int size){
 	int i;
 	Node *newNode;
@@ -15,6 +15,7 @@ Deck *genDeck(int size){
 		newDeck->tail->next=newNode;
 		newDeck->tail = newNode;
 	}
+	deckSizeSpec = size;
 	return newDeck;
 }
 
@@ -39,7 +40,7 @@ void oneRound(Deck *original, int *cleanArr){
 		}
 		i--;
 	}
-	for(z=0;z<6;z++){
+	for(z=0;z<16;z++){
 		printf("Inside Array: %d\n", cleanArr[z]);
 	}
 }	
@@ -91,4 +92,16 @@ void addCardHead(Deck *modify, int value){
 
 	newCard->next = modify->head;
 	modify->head = newCard;
+}
+
+void createCycles(int *completedArr, int *result){
+	int i, index;
+	
+	for(i=0;i<deckSizeSpec;i++){
+		index = i;
+		while(completedArr[index]!=i){
+			index = completedArr[index];
+			result[i] = result[i]+1;
+		}
+	}
 }
