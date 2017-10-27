@@ -28,5 +28,5 @@ int main(int argc, char *argv[]){
 	for(i=0;i<6;i++){
 		printf("New value: %d\n", arr[i]);
 	}
-	/*freeDeck(myDeck);*/
+	freeDeck(myDeck);
 }

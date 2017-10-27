@@ -19,13 +19,6 @@ Deck *genDeck(int size){
 }
 
 void freeDeck(Deck *list){
-	Node *temp, *temp2;
-	temp = list->head;
-	while(temp!=NULL){
-		temp2 = temp;
-		temp = temp2->next;
-		free(temp2);
-	}
 	free(list);
 }
 
@@ -40,6 +33,7 @@ void oneRound(Deck *original, int *cleanArr){
 		cleanArr[i]=headVal;
 		printf("array head val: %d\n", cleanArr[i]);
 		/*printf("New head Val: %d\n", original->head->cardValue);*/
+		printf("deck size: %d\n", original->deckSize);
 		if(original->head!=NULL){
 			addCardTail(original, removeHead(original));
 		}
@@ -72,11 +66,16 @@ void addCardTail(Deck *modify, int value){
 	}
 	newCard->cardValue = value;
 	newCard->next = NULL;
-	printf("Tail val: %d\n", modify->tail->cardValue);
+	/*printf("Tail val: %d\n", modify->tail->cardValue);
 	modify->tail->next = newCard;
-	modify->tail = newCard;
+	modify->tail = newCard;*/
 	if(modify->deckSize == 0){
 		modify->head=newCard;
+		modify->tail=newCard;
+	}
+	else{
+		modify->tail->next = newCard;
+		modify->tail = newCard;
 	}
 	modify->deckSize = modify->deckSize + 1;
 }
