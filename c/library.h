@@ -2,6 +2,8 @@
 #define LIBRARY_H
 #include <stdio.h>
 #include <stdlib.h>
+#include <errno.h>
+#include <limits.h>
 typedef struct nodeStruct Node;
 struct nodeStruct{
 	int cardValue;
@@ -20,5 +22,6 @@ void addCardHead(Deck *mod, int val);
 void addCardTail(Deck *mod, int val);
 void createCycles(int *completedArr, int *result);
 int removeHead(Deck *original);
-
+int lcm(int *arr);
+int gcd(int n1, int n2);
 #endif

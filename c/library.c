@@ -39,10 +39,10 @@ void oneRound(Deck *original, int *cleanArr){
 			addCardTail(original, removeHead(original));
 		}
 		i--;
-	}
+	}/*
 	for(z=0;z<16;z++){
 		printf("Inside Array: %d\n", cleanArr[z]);
-	}
+	}*/
 }	
 
 int removeHead(Deck *modify){
@@ -104,4 +104,23 @@ void createCycles(int *completedArr, int *result){
 			result[i] = result[i]+1;
 		}
 	}
+}
+int lcm(int *factors){
+	int product, i;
+	product = 1;
+	for(i=0;i<deckSizeSpec;i++){
+		product = product *(factors[i]/ gcd(product,factors[i]));
+	}
+	return product;
+}
+int gcd(int n1, int n2){
+	int z, gcd;
+	for(z=1;z<=n1 && z<=n2 ;z++){
+		if(n1%z==0 && n2%z==0){
+			gcd = z;
+			printf("gcd updated: %d", gcd);
+		}
+	}
+	printf("GCD BETWEEN %d and %d: %d\n", n1,n2,gcd);
+	return gcd;
 }
