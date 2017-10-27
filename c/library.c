@@ -1,15 +1,30 @@
 #include "library.h"
+
 static int deckSizeSpec;
+
+/*Generates a new deck filled with specified amount of cards*/
 Deck *genDeck(int size){
 	int i;
 	Node *newNode;
 	Deck *newDeck = (Deck*)malloc(sizeof(Deck));
+	if(newDeck == NULL){
+		fprintf(stderr, "Not enough memory to generate deck.\n");
+		exit(-1);
+	}
 	newDeck->deckSize = size;
 	newDeck->head = (Node*)malloc(sizeof(Node));
+	if(newDeck->head==NULL){
+		fprintf(stderr, "Not enough memory to generate deck.\n");
+		exit(-1);
+	}
 	newDeck->head->cardValue =0;
 	newDeck->tail = newDeck->head;
 	for(i=1;i<size;i++){
 		newNode = (Node*)malloc(sizeof(Node));
+		if(newNode == NULL){
+			fprintf(stderr,"Not enough memory to generate deck.\n");
+			exit(-1);
+		}
 		newNode->cardValue = i;
 		newNode->next=NULL;
 		newDeck->tail->next=newNode;
@@ -19,18 +34,18 @@ Deck *genDeck(int size){
 	return newDeck;
 }
 
+/*Frees the deck*/
 void freeDeck(Deck *list){
 	free(list);
 }
 
-void oneRound(Deck *original, int *cleanArr){
-	/*return the array of ints
-	int deckArr[original->size];*/
+/*Stores the order of the deck in the postRound array after a round*/
+void oneRound(Deck *original, int *postRound){
 	int i;
 	i=original->deckSize - 1;
 	while(original->head != NULL){
 		int headVal = removeHead(original);
-		cleanArr[i]=headVal;
+		postRound[i]=headVal;
 		if(original->head!=NULL){
 			addCardTail(original, removeHead(original));
 		}
@@ -38,6 +53,7 @@ void oneRound(Deck *original, int *cleanArr){
 	}
 }	
 
+/*Removes the top card on the deck*/
 int removeHead(Deck *modify){
 	Node *temp;
 	int returnVal = modify->head->cardValue;
@@ -51,6 +67,7 @@ int removeHead(Deck *modify){
 	return returnVal;
 }
 
+/*Placing the drawn card at the end of a deck*/
 void addCardTail(Deck *modify, int value){
 	Node *newCard;
 	if((newCard = (Node*)malloc(sizeof(Node)))==NULL){
@@ -70,6 +87,8 @@ void addCardTail(Deck *modify, int value){
 	modify->deckSize = modify->deckSize + 1;
 }
 
+/*Determines the rotational group sizes. 
+Stores each card's size in its respective index in result*/
 void createCycles(int *completedArr, int *result){
 	int i, index;
 	for(i=0;i<deckSizeSpec;i++){
@@ -81,11 +100,12 @@ void createCycles(int *completedArr, int *result){
 	}
 }
 
+/*Computes the least common multiple of the rotational group sizes.
+Returns -1 if the LCM causes overflow*/
 int lcm(int *factors){
 	int product, i,z;
 	product = 1;
 	for(i=0;i<deckSizeSpec;i++){
-		/*product = product *(factors[i]/ gcd(product,factors[i]));*/
 		int gcdValue = gcd(product,factors[i]);
 		z = product * (factors[i]/ gcdValue);
 		if(product!=0&&(z/product!=(factors[i]/gcdValue))){
@@ -99,6 +119,7 @@ int lcm(int *factors){
 	return product;
 }
 
+/*Computes the greatest common denominator. Used to find the LCM*/
 int gcd(int n1, int n2){
 	int z, gcd;
 	for(z=1;z<=n1 && z<=n2 ;z++){
@@ -108,3 +129,4 @@ int gcd(int n1, int n2){
 	}
 	return gcd;
 }
+
